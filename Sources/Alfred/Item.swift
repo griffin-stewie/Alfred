@@ -14,6 +14,9 @@ public struct Item: Encodable, ItemRepresentable {
         uid: String? = nil,
         title: String,
         subtitle: String,
+        match: String? = nil,
+        text: String? = nil,
+        quicklookurl: String? = nil,
         arg: Argument? = nil,
         icon: Icon? = nil,
         valid: Bool = true,
@@ -25,6 +28,9 @@ public struct Item: Encodable, ItemRepresentable {
         self.uid = uid
         self.title = title
         self.subtitle = subtitle
+        self.match = match
+        self.text = text
+        self.quicklookurl = quicklookurl
         self.arg = arg
         self.icon = icon
         self.valid = valid
@@ -37,6 +43,9 @@ public struct Item: Encodable, ItemRepresentable {
     public var uid: String?
     public var title: String
     public var subtitle: String
+    public var match: String?
+    public var text: String?
+    public var quicklookurl: String?
     public var arg: Argument?
     public var icon: Icon?
     public var valid: Bool
@@ -48,6 +57,24 @@ public struct Item: Encodable, ItemRepresentable {
     public func uid(_ uid: String) -> Item {
         var item = self
         item.uid = uid
+        return item
+    }
+
+    public func match(_ match: String) -> Item {
+        var item = self
+        item.match = match
+        return item
+    }
+
+    public func text(_ text: String) -> Item {
+        var item = self
+        item.text = text
+        return item
+    }
+
+    public func quicklookurl(_ quicklookurl: String) -> Item {
+        var item = self
+        item.quicklookurl = quicklookurl
         return item
     }
 
@@ -95,7 +122,7 @@ public struct Item: Encodable, ItemRepresentable {
 
     private enum CodingKeys: String, CodingKey {
         case uid, title, subtitle, arg, icon,
-            valid, autocomplete, type, mod
+            valid, autocomplete, type, mod, match, text, quicklookurl
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -105,6 +132,15 @@ public struct Item: Encodable, ItemRepresentable {
         }
         try container.encode(title, forKey: .title)
         try container.encode(subtitle, forKey: .subtitle)
+        if let match = match {
+            try container.encode(match, forKey: .match)
+        }
+        if let text = text {
+            try container.encode(text, forKey: .text)
+        }
+        if let quicklookurl = quicklookurl {
+            try container.encode(quicklookurl, forKey: .quicklookurl)
+        }
         if let arg = arg {
             try container.encode(arg, forKey: .arg)
         }
