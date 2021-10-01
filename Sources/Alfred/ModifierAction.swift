@@ -19,8 +19,6 @@ public struct ModifierAction: Encodable, Equatable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(arg, forKey: .arg)
         try container.encode(subtitle, forKey: .subtitle)
-        if !valid {
-            try container.encode(valid, forKey: .valid)
-        }
+        try container.encode(valid, forKey: .valid)
     }
 }

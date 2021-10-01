@@ -122,7 +122,7 @@ public struct Item: Encodable, ItemRepresentable {
 
     private enum CodingKeys: String, CodingKey {
         case uid, title, subtitle, arg, icon,
-            valid, autocomplete, type, mod, match, text, quicklookurl
+            valid, autocomplete, type, mods, match, text, quicklookurl
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -163,7 +163,7 @@ public struct Item: Encodable, ItemRepresentable {
         }
         if cmd != nil || alt != nil {
             let wrapper = ModifierWrapper(cmd: cmd, alt: alt)
-            try container.encode(wrapper, forKey: .mod)
+            try container.encode(wrapper, forKey: .mods)
         }
     }
 }
