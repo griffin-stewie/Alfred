@@ -180,7 +180,7 @@ private extension NSColor {
             .map { result -> String in
                 let startIdx = rgba.index(rgba.startIndex, offsetBy: result.range.location)
                 let endIdx = rgba.index(startIdx, offsetBy: result.range.length)
-                return rgba.substring(with: startIdx..<endIdx)
+                return String(rgba[startIdx..<endIdx])
             }
             .compactMap { Double($0).map({ CGFloat($0) }) }
         guard results.count == 4 else { return nil }
